@@ -11,16 +11,14 @@ class Solve:
         reversed_x = 0
         while x:
             digit = x % 10
+            # Check if the reversed integer is within the 32-bit signed integer range
+            if reversed_x > (INT_MIN // 10) or (reversed_x == (INT_MAX // 10) and digit > INT_MAX % 10):
+                return 0
             reversed_x = reversed_x * 10 + digit
             x //= 10
 
         # Restore the sign
-        reversed_x *= sign
-
-        # Check if the reversed integer is within the 32-bit signed integer range
-        if reversed_x < INT_MIN or reversed_x > INT_MAX:
-            return 0
-        return reversed_x
+        return reversed_x * sign
 
 # Apply Usage
 solver = Solve()
@@ -28,3 +26,5 @@ solver = Solve()
 # Test cases
 print(solver.reverse(123))
 print(solver.reverse(-123))
+print(solver.reverse(120))
+print(solver.reverse(0))
