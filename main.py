@@ -1,5 +1,5 @@
-class Solution:
-    def reverse(x: int) -> int:
+class Solve:
+    def reverse(self, x: int) -> int:
         # Define the 32-bit signed integer range
         INT_MIN, INT_MAX = -2**31, 2**31 - 1
         
@@ -21,3 +21,10 @@ class Solution:
         if reversed_x < INT_MIN or reversed_x > INT_MAX:
             return 0
         return reversed_x
+
+# Apply Usage
+solver = Solve()
+
+# Test cases
+print(solver.reverse(123))
+print(solver.reverse(-123))
