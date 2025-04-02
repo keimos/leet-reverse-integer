@@ -1,3 +1,4 @@
+import unittest
 class Solve:
     def reverse(self, x: int) -> int:
         # Define the 32-bit signed integer range
@@ -20,11 +21,24 @@ class Solve:
         # Restore the sign
         return reversed_x * sign
 
-# Apply Usage
-solver = Solve()
+class TestSolve(unittest.TestCase):
+    def setUp(self):
+        self.solver = Solve()
 
-# Test cases
-print(solver.reverse(123))
-print(solver.reverse(-123))
-print(solver.reverse(120))
-print(solver.reverse(0))
+    def test_reverse_positive(self):
+        self.assertEqual(self.solver.reverse(123), 321)
+
+    def test_reverse_negative(self):
+        self.assertEqual(self.solver.reverse(-123), -321)
+
+    def test_reverse_zero(self):
+        self.assertEqual(self.solver.reverse(0), 0)
+
+    def test_reverse_with_trailing_zeros(self):
+        self.assertEqual(self.solver.reverse(120), 21)
+
+    def test_reverse_large_number(self):
+        self.assertEqual(self.solver.reverse(1534236469), 0)  # Overflow case
+
+if __name__ == "__main__":
+    unittest.main()
