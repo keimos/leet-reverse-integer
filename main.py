@@ -1,42 +1,44 @@
-<<<<<<< HEAD
 import unittest
 
-=======
->>>>>>> origin/main
 class Solve:
-    def reverse(self, x: int) -> int:        
+    def reverse(self, x: int) -> int:
         INT_MIN, INT_MAX = -2**31, 2**31 - 1
         
         sign = -1 if x < 0 else 1
         x = abs(x)
-
+        
         reversed_x = 0
         while x:
             digit = x % 10
-<<<<<<< HEAD
-            if reversed_x > (INT_MIN // 10) or (reversed_x == (INT_MAX // 10) and digit > INT_MAX % 10):
-=======
-            # Check if the reversed integer is within the 32-bit signed integer range
-            if reversed_x > (INT_MAX // 10) or (reversed_x == (INT_MAX // 10) and digit > INT_MAX % 10):
->>>>>>> origin/main
+            if reversed_x > INT_MAX // 10 or (reversed_x == INT_MAX // 10 and digit > INT_MAX % 10):
                 return 0
             reversed_x = reversed_x * 10 + digit
             x //= 10
-
+        
         return reversed_x * sign
 
-<<<<<<< HEAD
 class TestSolve(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.solver = Solve()
-=======
-# Apply Usage
-solver = Solve()
->>>>>>> origin/main
+    
+    def test_positive_number(self):
+        self.assertEqual(self.solver.reverse(123), 321)
+    
+    def test_negative_number(self):
+        self.assertEqual(self.solver.reverse(-123), -321)
+    
+    def test_number_with_trailing_zero(self):
+        self.assertEqual(self.solver.reverse(120), 21)
+    
+    def test_zero(self):
+        self.assertEqual(self.solver.reverse(0), 0)
+    
+    def test_large_number_overflow(self):
+        self.assertEqual(self.solver.reverse(1534236469), 0)
+    
+    def test_negative_large_number_overflow(self):
+        self.assertEqual(self.solver.reverse(-2147483648), 0)
 
-# Test cases
-print(solver.reverse(123))
-print(solver.reverse(-123))
-print(solver.reverse(120))
-print(solver.reverse(0))
+if __name__ == "__main__":
+    unittest.main()
